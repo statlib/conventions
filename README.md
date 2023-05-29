@@ -8,3 +8,26 @@ Coding conventions
 4. Alignment: Operators such as `=` and `AND` in the `ON` and `WHERE` clauses are aligned vertically. This helps in visually relating different parts of the query.
 5. Spacing: Adequate spacing between keywords, operators, and identifiers improves the readability of the code.
 6. Function names: Use lowercase or camel case, e.g. `max(timestamp)`.
+
+```
+import sqlparse
+
+def format_sql(query):
+    return sqlparse.format(query, 
+                           reindent=True, 
+                           keyword_case='upper',
+                           identifier_case='lower',
+                           comma_first=False)
+
+query = """
+    select 
+        avg(salary) as average_salary, 
+        count(*) as employee_count, 
+        max(salary) as max_salary 
+    from 
+        employees;
+"""
+
+print(format_sql(query))
+
+```
